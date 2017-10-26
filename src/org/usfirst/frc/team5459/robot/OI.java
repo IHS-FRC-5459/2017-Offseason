@@ -13,6 +13,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import org.usfirst.frc.team5459.robot.commands.Climb;
 import org.usfirst.frc.team5459.robot.commands.ExtendBucket;
 import org.usfirst.frc.team5459.robot.commands.RetracktBucket;
+import org.usfirst.frc.team5459.robot.commands.Shifter;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -59,8 +60,10 @@ public class OI {
 		Button bumperRight = new JoystickButton(operator, 5);
 		Button bumperLeft = new JoystickButton(operator, 4);
 		Button climber = new JoystickButton(operator, 6);
+		Button shifter = new JoystickButton(driver, 5);
 		bumperRight.whenPressed(new ExtendBucket());
 		bumperLeft.whenPressed(new RetracktBucket());
+		shifter.whenPressed(new Shifter());
 		//climber.whenPressed(new Climb());
 		
 	}

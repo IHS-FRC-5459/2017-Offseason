@@ -7,6 +7,9 @@ import org.usfirst.frc.team5459.robot.commands.DriveCommand;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -18,11 +21,13 @@ public class DriveSubsystem extends Subsystem {
     // here. Call these from Commands.
 	private CANTalon rightController ;
 	private CANTalon leftController ;
-	private double scaleFactor;
+	private double scaleFactor = 0.8;
+	private DoubleSolenoid shifter;
 
 	public DriveSubsystem() {
 		rightController = Robot.getMiddleRight();
 		leftController = Robot.getMiddleLeft();
+		shifter = Robot.getShifter();
 	}
 	
 	public void changeTalonProfile(){
@@ -35,18 +40,16 @@ public class DriveSubsystem extends Subsystem {
 		}
 	}
 	public void setSpeedRight(double power){
-		rightController.changeControlMode(TalonControlMode.PercentVbus);
+		rightController.changeControlMode(TalonControlMode.PercentVbus );
 		
 		
-		rightController.set(-power);
-		System.out.println("Hello" + rightController.get());
+		rightController.set(-power * scaleFactor);
 	}
 	
 	public void setSpeedLeft(double power){
 		leftController.changeControlMode(TalonControlMode.PercentVbus);
 		
-		System.out.println("Hello");
-		leftController.set(power); 
+		leftController.set(power * scaleFactor); 
 		
 	}
 	
@@ -79,6 +82,14 @@ public class DriveSubsystem extends Subsystem {
 			return true;
 		}else {
 			return false;
+		}
+    }
+    
+    public void shift(){
+    	if (shifter.get().equals(Value.kForward)) {
+			shifter.set(Value.kReverse);
+		} else {
+			shifter.set(Value.kForward);
 		}
     }
     

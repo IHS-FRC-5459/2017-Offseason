@@ -206,7 +206,6 @@ public class Robot extends IterativeRobot {
 		}else {
 			climber.set(0);
 		}
-		System.out.println(oi.getClimber());
 	}
 
 	/**
