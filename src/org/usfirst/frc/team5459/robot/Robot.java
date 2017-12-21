@@ -178,7 +178,7 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 
-		
+		System.out.println("Teleop init");
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		Scheduler.getInstance().add(new DriveCommand());
@@ -202,9 +202,10 @@ public class Robot extends IterativeRobot {
 			
 		if(oi.getClimber()){
 			climber.set(1.0);
-			
+			System.out.println("climber running");
 		}else {
 			climber.set(0);
+			System.out.println("climber not running");
 		}
 	}
 
